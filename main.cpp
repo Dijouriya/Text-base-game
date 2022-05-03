@@ -2,8 +2,14 @@
 #include<ctime>
 using namespace std;
 
-
+//global variables
+int health = 100;
 string inventory[4];
+
+//function declarations
+void Puzzle();
+
+
 int main() {
 	cout << "what? where am I? ugh!" << endl;
 	cout << "You say to yourself as you wake up, in a confused dazed. you're in a strange room with one window and no door. you analize the room for anythimg to break the window or some other posible way to get out." << endl;
@@ -12,9 +18,15 @@ int main() {
 	cout << "Your so happy you escaped that you do a little dancey dance" << endl; 
 	cout << "But you are not outside. you are in another room!?" << endl << endl;
 
+	//local variables
 		int room = 1;
 		char input;
 		do {
+			//stuff here happens EVERY turn
+			cout << "Your health is now " << health << endl;
+			cout << "inventory ";
+			for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
+				cout << inventory[i] << " | ";
 
 			switch (room) {
 			case 1:
@@ -22,11 +34,6 @@ int main() {
 				cin >> input;
 				if (input == 's')
 					room = 3;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That not a option!" << endl;
 				break;
@@ -39,11 +46,6 @@ int main() {
 				cin >> input;
 				if (input == 'e')
 					room = 3;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That not a option!" << endl;
 				break;
@@ -65,11 +67,6 @@ int main() {
 					room = 2;
 				else if (input == 'n')
 					room = 1;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That not a option!" << endl;
 				break;
@@ -78,11 +75,6 @@ int main() {
 				cin >> input;
 				if (input == 'w')
 					room = 3;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -97,11 +89,6 @@ int main() {
 					room = 3;
 				else if (input == 'f')
 					room = 6;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -114,11 +101,6 @@ int main() {
 					room = 8;
 				if (input == 'b')
 					room = 5;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -133,11 +115,6 @@ int main() {
 					room = 9;
 				else if (input == 'f')
 					room = 8;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -148,11 +125,6 @@ int main() {
 					room = 9;
 				else if (input == 'r')
 					room = 10;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -161,11 +133,6 @@ int main() {
 				cin >> input;
 				if (input == 'f')
 					room = 10;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
@@ -176,14 +143,79 @@ int main() {
 					room = 9;
 				else if (input == 'd')
 					cout << "Your outside!" << endl;
-				else if (input == 'i') {
-					cout << "inventory ";
-					for (int i = 0; i < 4; i++)//for loop that prints out inventory slots
-						cout << inventory[i] << " | ";
-				}
 				else
 					cout << "That is not an option!" << endl;
 				break;
 			}
-		} while (input != 'q');
+		} while (input != 'q' || health <= 0);
+		//end of the game!
+		if (health <= 0)
+			cout << "you died." << endl;
+	}//end of main
+
+
+	//function definitions
+	void Puzzle() {
+		string input;
+		cout << "A mysterious little doll appears in the coner of the room and talks to you!?" << endl;
+		int num = rand() % 100 + 1; //gets a number between 1-100
+		if (num < 20) {
+			cout << "What has to be broken before you can use it?" << endl;
+			cin >> input;
+			if (input.compare("an egg") == 0 || input.compare("egg") == 0)
+				cout << "darn you got it";
+			else {
+				cout << "WRONG!" << endl;
+				health -= 10;
+			}
+		}
+		else if (num < 40) {
+			cout << "I am scary, and when you have more of me, you will see only less. What am I?" << endl;
+			cin >> input;
+			if (input.compare("the dark") == 0 || input.compare("darkness") == 0)
+				cout << "how'd you figure its out!";
+			else {
+				cout << "HAAAAAAA! You got it wrong!" << endl;
+				health -= 20;
+			}
+		}
+		else if (num < 50) {
+			cout << "What tastes better than it smells?" << endl;
+			cin >> input;
+			if (input.compare("the tongue") == 0 || input.compare("your tongue") == 0)
+				cout << "how'd you figure its out!";
+			else {
+				cout << "HAAAAAAA! You got it wrong!" << endl;
+				health -= 30;
+			}
+		}
+		else if (num < 70) {
+			cout << "When is a door no longer a door?" << endl;
+			cin >> input;
+			if (input.compare("when it's ajar") == 0 || input.compare("when the door is ajar") == 0)
+				cout << "how'd you figure its out!";
+			else {
+				cout << "HAAAAAAA! You got it wrong!" << endl;
+				health -= 40;
+			}
+		}
+		else if (num < 90) {
+			cout << "What has 13 hearts but no other organs?" << endl;
+			cin >> input;
+			if (input.compare("a deck of cards") == 0 || input.compare("deck of cards") == 0)
+				cout << "how'd you figure its out!";
+			else {
+				cout << "HAAAAAAA! You got it wrong!" << endl;
+				health -= 50;
+			}
+		}
+		else
+			cout << "Which word in the dictionary is spelled incorrectly?" << endl;
+			cin >> input;
+			if (input.compare("incorrectly") == 0 || input.compare("the word incorrectly") == 0)
+				cout << "how'd you figure its out!";
+			else {
+				cout << "HAAAAAAA! You got it wrong!" << endl;
+				health -= 20;
+			}
 	}
